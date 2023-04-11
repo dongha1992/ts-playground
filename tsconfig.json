@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es5",
     "lib": [
       "dom",
@@ -18,9 +19,45 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react"
   },
   "include": [
     "src"
   ]
+  // "paths": {
+  //   "pages/*": [
+  //     "pages/*"
+  //   ],
+  //   "containers/*": [
+  //     "containers/*"
+  //   ],
+  //   "components/*": [
+  //     "components/*"
+  //   ],
+  //   "sections/*": [
+  //     "sections/*"
+  //   ],
+  //   "constants/*": [
+  //     "constants/*"
+  //   ],
+  //   "models/*": [
+  //     "models/*"
+  //   ],
+  //   "remotes/*": [
+  //     "remotes/*"
+  //   ],
+  //   "styles/*": [
+  //     "styles/*"
+  //   ],
+  //   "utils/*": [
+  //     "utils/*"
+  //   ],
+  //   "hooks/*": [
+  //     "hooks/*"
+  //   ],
+  //   "stores/*": [
+  //     "stores/*"
+  //   ]
+  // }
 }
