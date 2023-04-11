@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-var-requires */
+
 const path = require('path');
 const { override, getBabelLoader } = require('customize-cra');
 

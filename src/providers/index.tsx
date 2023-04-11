@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'styles/sass/app.scss';
 import { GlobalPortal } from 'GlobalPortal';
+import { PageLayout } from 'components/PageLayout';
 
 /* 이 파일에서 react-query, auth-provider 넣어줌 */
 
@@ -24,7 +25,9 @@ function AppProviders({ children }: Props) {
           }
         `}
       />
-      <Router>{children}</Router>
+      <PageLayout>
+        <Router>{children}</Router>
+      </PageLayout>
     </GlobalPortal.Provider>
   );
 }

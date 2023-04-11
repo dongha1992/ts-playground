@@ -25,40 +25,46 @@
   },
   "include": [
     "src"
-  ]
-  // "paths": {
-  //   "pages/*": [
-  //     "pages/*"
-  //   ],
-  //   "containers/*": [
-  //     "containers/*"
-  //   ],
-  //   "components/*": [
-  //     "components/*"
-  //   ],
-  //   "sections/*": [
-  //     "sections/*"
-  //   ],
-  //   "constants/*": [
-  //     "constants/*"
-  //   ],
-  //   "models/*": [
-  //     "models/*"
-  //   ],
-  //   "remotes/*": [
-  //     "remotes/*"
-  //   ],
-  //   "styles/*": [
-  //     "styles/*"
-  //   ],
-  //   "utils/*": [
-  //     "utils/*"
-  //   ],
-  //   "hooks/*": [
-  //     "hooks/*"
-  //   ],
-  //   "stores/*": [
-  //     "stores/*"
-  //   ]
-  // }
+  ],
+  "paths": {
+    "pages/*": [
+      "pages/*"
+    ],
+    "components/*": [
+      "components/*"
+    ],
+    "styles/*": [
+      "styles/*"
+    ],
+    "constants/*": [
+      "constants/*"
+    ],
+    "providers/*": [
+      "providers/*"
+    ],
+    "routes/*": [
+      "routes/*"
+    ],
+    // "sections/*": [
+    //   "sections/*"
+    // ],
+    // "models/*": [
+    //   "models/*"
+    // ],
+    // "remotes/*": [
+    //   "remotes/*"
+    // ],
+    // "containers/*": [
+    //   "containers/*"
+    // ]
+    // "utils/*": [
+    //   "utils/*"
+    // ],
+    // "hooks/*": [
+    //   "hooks/*"
+    // ],
+    // "stores/*": [
+    //   "stores/*"
+    // ]
+  }
 }
