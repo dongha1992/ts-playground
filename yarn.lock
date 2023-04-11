@@ -527,7 +527,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
-"@babel/plugin-syntax-jsx@^7.12.1", "@babel/plugin-syntax-jsx@^7.18.6", "@babel/plugin-syntax-jsx@^7.21.4":
+"@babel/plugin-syntax-jsx@^7.12.1", "@babel/plugin-syntax-jsx@^7.17.12", "@babel/plugin-syntax-jsx@^7.18.6", "@babel/plugin-syntax-jsx@^7.21.4":
   version "7.21.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.21.4.tgz#f264ed7bf40ffc9ec239edabc17a50c4f5b6fea2"
   integrity sha512-5hewiLct5OKyh6PLKEYaFclcqtIgCb6bmELouxjF6up5q3Sov7rOayW4RwhbaBL0dit8rA80GNfY+UuDp2mBbQ==
@@ -811,7 +811,7 @@
   dependencies:
     "@babel/plugin-transform-react-jsx" "^7.18.6"
 
-"@babel/plugin-transform-react-jsx@^7.18.6":
+"@babel/plugin-transform-react-jsx@^7.17.12", "@babel/plugin-transform-react-jsx@^7.18.6":
   version "7.21.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.21.0.tgz#656b42c2fdea0a6d8762075d58ef9d4e3c4ab8a2"
   integrity sha512-6OAWljMvQrZjR2DaNhVfRz6dkCAVV+ymcLUmaf8bccGOHn2v5rHJK3tTpij0BuhdYWP4LLaqj5lwcdlpAAPuvg==
@@ -1195,6 +1195,13 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.2.0.tgz#2cbcf822bf3764c9658c4d2e568bd0c0cb748016"
   integrity sha512-+OJ9konv95ClSTOJCmMZqpd5+YGsB2S+x6w3E1oaM8UuR5j8nTNHYSz8c9BEPGDOCMQYIEEGlVPj/VY64iTbGw==
 
+"@emotion/babel-plugin-jsx-pragmatic@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@emotion/babel-plugin-jsx-pragmatic/-/babel-plugin-jsx-pragmatic-0.2.0.tgz#6fdd78600417973fa2610704693158181d8505b7"
+  integrity sha512-VPfKAtb/bVyu5y+HzCPj9bb2nHnj9yX5mMAU7N0pIDcrFZo8aqDyHXLYF8BD7tY4pNL09N87dygVLKIkQvshJw==
+  dependencies:
+    "@babel/plugin-syntax-jsx" "^7.17.12"
+
 "@emotion/babel-plugin@11.1.2":
   version "11.1.2"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.1.2.tgz#68fe1aa3130099161036858c64ee92056c6730b7"
@@ -1213,7 +1220,7 @@
     source-map "^0.5.7"
     stylis "^4.0.3"
 
-"@emotion/babel-plugin@^11.10.6":
+"@emotion/babel-plugin@^11.10.0", "@emotion/babel-plugin@^11.10.6":
   version "11.10.6"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.10.6.tgz#a68ee4b019d661d6f37dec4b8903255766925ead"
   integrity sha512-p2dAqtVrkhSa7xz1u/m9eHYdLi+en8NowrmXeF/dKtJpU8lCWli8RUAati7NcSl0afsBott48pdnANuD0wh9QQ==
@@ -1229,6 +1236,16 @@
     find-root "^1.1.0"
     source-map "^0.5.7"
     stylis "4.1.3"
+
+"@emotion/babel-preset-css-prop@^11.10.0":
+  version "11.10.0"
+  resolved "https://registry.yarnpkg.com/@emotion/babel-preset-css-prop/-/babel-preset-css-prop-11.10.0.tgz#23922787561d8376782b0e9006323512fe797275"
+  integrity sha512-oN2lCP0NJTEt80IIeFM1RbmapeEVNYzKXYk2pYirAuom9WvV9Oz/aJQN5Hn3RyBMPaY+Of1OZYpTVMle2jUm4g==
+  dependencies:
+    "@babel/plugin-transform-react-jsx" "^7.17.12"
+    "@babel/runtime" "^7.18.3"
+    "@emotion/babel-plugin" "^11.10.0"
+    "@emotion/babel-plugin-jsx-pragmatic" "^0.2.0"
 
 "@emotion/cache@^11.10.5":
   version "11.10.7"

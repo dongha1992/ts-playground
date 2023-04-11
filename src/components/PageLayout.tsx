@@ -1,4 +1,4 @@
-import { colors } from '../constants/color';
+import { colors } from '../constants/colors';
 import { css } from '@emotion/react';
 
 import { ReactNode } from 'react';

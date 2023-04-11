@@ -2,6 +2,7 @@ import normalize from 'emotion-normalize';
 import { css, Global } from '@emotion/react';
 import { ReactNode } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+
 import 'styles/sass/app.scss';
 import { GlobalPortal } from 'GlobalPortal';
 import { PageLayout } from 'components';

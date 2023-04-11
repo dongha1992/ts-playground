@@ -6,20 +6,20 @@
   .typography-#{$name},
   .font-size--#{$font-size-number} {
     font-size: $font-size;
-    font-size: var(--toss-font-size-#{$font-size-number});
+    font-size: var(--my-font-size-#{$font-size-number});
     line-height: $line-height;
-    line-height: var(--toss-line-height-#{$font-size-number});
+    line-height: var(--my-line-height-#{$font-size-number});
   }
 
   .typography-#{$name}--skeleton-wrapper {
     height: $line-height;
-    height: var(--toss-line-height-#{$font-size-number});
+    height: var(--my-line-height-#{$font-size-number});
     padding-top: 0.2em;
   }
 
   .typography-#{$name}--skeleton {
     height: $font-size;
-    height: var(--toss-font-size-#{$font-size-number});
+    height: var(--my-font-size-#{$font-size-number});
     &.skeleton {
       border-radius: $skeleton-border-radius;
     }
