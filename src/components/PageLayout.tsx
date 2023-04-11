@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import { ReactNode } from 'react';
 
-function PageLayout({ children }: { children: ReactNode }) {
+export default function PageLayout({ children }: { children: ReactNode }) {
   return (
     <div
       css={css`
@@ -24,5 +24,3 @@ function PageLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
-
-export { PageLayout };

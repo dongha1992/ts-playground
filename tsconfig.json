@@ -7,7 +7,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "types": ["@emotion/react/types/css-prop"],
+    "types": ["react", "@emotion/react/types/css-prop"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -44,7 +44,14 @@
     ],
     "routes/*": [
       "routes/*"
+    ],   
+    "utils/*": [
+      "utils/*"
     ],
+    "assets/*": [
+      "assets/*"
+    ],
+
     // "sections/*": [
     //   "sections/*"
     // ],
@@ -57,9 +64,6 @@
     // "containers/*": [
     //   "containers/*"
     // ]
-    // "utils/*": [
-    //   "utils/*"
-    // ],
     // "hooks/*": [
     //   "hooks/*"
     // ],
