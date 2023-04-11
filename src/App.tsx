@@ -1,5 +1,3 @@
-import './App.css';
-
 /* AuthenticatedApp과 UnauthenticatedApp 분기 */
 
 // TODO: lazy사용
