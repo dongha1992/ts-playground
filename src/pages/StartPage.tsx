@@ -11,27 +11,27 @@ function StartPage() {
     <>
       <Spacing size={20} />
       <Icon name="logo" size={150} />
-      <Top22>{`토스 프론트엔드\n기술과제를 시작할게요`}</Top22>
+      <Top22>{`텍스트1\n텍스트2`}</Top22>
       <Spacing size={32} />
       <Banner
         css={marginX24}
         iconSrc="https://static.toss.im/3d-emojis/u1F91D-apng.png"
-        top="지금 토스팀에 합류해서"
-        bottom="최고의 제품을 함께 만들어요!"
+        top="텍스트1"
+        bottom="텍스트2"
       />
       <Spacing size={24} />
       <Border size={16} />
       <List>
-        <ListHeader>토스에 합류하시면</ListHeader>
+        <ListHeader>텍스트 텍스트</ListHeader>
         <Spacing size={9} />
         <ListRow
           contents={
             <ListRow.Text2Rows
-              top="최고의 제품을 만들어"
+              top="텍스트1"
               topProps={{
                 color: colors.grey700,
               }}
-              bottom="시장을 혁신하는 경험을 할 수 있어요"
+              bottom="텍스트2"
               bottomProps={{
                 color: colors.grey600,
                 typography: 't5',
