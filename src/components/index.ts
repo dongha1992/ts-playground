@@ -8,5 +8,20 @@ import Border from './Border';
 import List from './List';
 import ListRow from './ListRow';
 import Button from './Button';
+import FixedBottomCTA from './FixedBottomCTA';
+import Radio from './Radio';
 
-export { FullPageSpinner, Spacing, PageLayout, Icon, Banner, Text, Border, List, ListRow, Button };
+export {
+  FullPageSpinner,
+  Spacing,
+  PageLayout,
+  Icon,
+  Banner,
+  Text,
+  Border,
+  List,
+  ListRow,
+  Button,
+  FixedBottomCTA,
+  Radio,
+};

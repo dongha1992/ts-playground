@@ -95,20 +95,69 @@ $button-transition: color $button-transition-duration ease-in-out,
 
   width: 100%;
   border-radius: $borderRadius;
+
   .button__content {
+    min-width: $minWidth;
+    height: $height;
+    max-height: $maxHeight;
+    padding: $padding;
   }
   .button__loader {
+    display: flex;
+    $negativeLoaderMargin: #{math.div(strip-unit($loaderSize), -2)}px;
+    margin: $negativeLoaderMargin 0;
+    .loader__animation {
+      stroke: currentColor;
+      width: $loaderSize;
+      height: $loaderSize;
+    }
+  }
+
+  &.button--wrap {
+    > .button__content {
+      height: auto;
+    }
+  }
+
+  &:not(.button--wrap) {
+    & > .button__content {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 }
 
 .button--type-dark {
+  background-color: $greyBackground;
+  &.button--style-weak {
+    color: $grey700;
+    background-color: rgb(242, 244, 246);
+
+    @include hover-active('&:not(:disabled):not(.disabled)') {
+      background-color: rgb(208, 212, 216);
+    }
+  }
 }
 
 .button--wrap {
+  white-space: normal;
 }
 
 .a.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+a.button.disabled,
+fieldset:disabled a.button {
+  pointer-events: none;
 }
 
 .button__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
