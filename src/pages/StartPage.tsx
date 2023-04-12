@@ -6,9 +6,10 @@ import ListHeader from 'components/ListHeader';
 import ListRow from 'components/ListRow';
 import { colors } from 'constants/colors';
 import FixedBottomCTA from 'components/FixedBottomCTA';
+import { useCustomRouter } from 'hooks/useCustomRouter';
 
 function StartPage() {
-  const router = useRouter();
+  const router = useCustomRouter();
   return (
     <>
       <Spacing size={20} />
