@@ -1,0 +1,10 @@
+@use 'sass:math';
+
+$range-height: 40px;
+$range-knob-radius: 18px;
+$track-height: 5px;
+$track-border-radius: 2.5px;
+
+$track-top: math.div($range-height - $track-height, 2);
+
+$horizontal-padding: 4px;

@@ -11,6 +11,10 @@ import Button from './Button';
 import FixedBottomCTA from './FixedBottomCTA';
 import Radio from './Radio';
 import Lottie from './Lottie';
+import Header from './Header';
+import Range from './Range';
+import TextArea from './TextArea';
+import TextFieldLine from './TextFieldLine';
 
 export {
   FullPageSpinner,
@@ -26,4 +30,8 @@ export {
   FixedBottomCTA,
   Radio,
   Lottie,
+  Header,
+  Range,
+  TextArea,
+  TextFieldLine,
 };

@@ -40,7 +40,7 @@ function InquiryCompletePage() {
       <FixedBottomCTA
         onClick={() => {
           // 개발 편의를 위해 앱 재시작
-          location.replace('/start');
+          location.replace('/test');
         }}
       >
         지금 바로 받으러 가기
