@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import React, { ComponentProps, ReactNode } from 'react';
+import Icon from './Icon';
 import Text from './Text';
 
 interface ListRowProps {
@@ -21,7 +22,9 @@ function ListRow({ className, contents, right, withArrow, onClick }: ListRowProp
       `}
       onClick={onClick}
     >
-      {contents} {right}
+      {contents}
+      {right}
+      {withArrow ? <Icon name="icon-arrow-right-mono" size={24} /> : undefined}
     </li>
   );
 }
