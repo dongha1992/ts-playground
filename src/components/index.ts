@@ -10,6 +10,7 @@ import ListRow from './ListRow';
 import Button from './Button';
 import FixedBottomCTA from './FixedBottomCTA';
 import Radio from './Radio';
+import Lottie from './Lottie';
 
 export {
   FullPageSpinner,
@@ -24,4 +25,5 @@ export {
   Button,
   FixedBottomCTA,
   Radio,
+  Lottie,
 };
