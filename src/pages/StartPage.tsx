@@ -5,8 +5,10 @@ import { marginX24 } from 'utils/spacing';
 import ListHeader from 'components/ListHeader';
 import ListRow from 'components/ListRow';
 import { colors } from 'constants/colors';
+import FixedBottomCTA from 'components/FixedBottomCTA';
 
 function StartPage() {
+  const router = useRouter();
   return (
     <>
       <Spacing size={20} />
@@ -41,7 +43,26 @@ function StartPage() {
           }
           right={<Icon name="icon-check" size={30} />}
         />
+        <Spacing size={4} />
+        <ListRow
+          contents={
+            <ListRow.Text2Rows
+              top="자율과 책임 원칙 아래"
+              topProps={{
+                color: colors.grey700,
+              }}
+              bottom="스스로 결정하고 주도적으로 일할 수 있어요"
+              bottomProps={{
+                color: colors.grey600,
+                typography: 't5',
+                fontWeight: 'bold',
+              }}
+            />
+          }
+          right={<Icon name="icon-check" size={30} />}
+        />
       </List>
+      <FixedBottomCTA onClick={() => router.push('/property-type')}>기술과제 시작하기</FixedBottomCTA>
     </>
   );
 }

@@ -42,4 +42,12 @@ ListRow.Text2Rows = ({ top, topProps, bottom, bottomProps }: Text2RowsProps) => 
   );
 };
 
+interface Text1RowProps {
+  top: string;
+  topProps?: ComponentProps<typeof Text>;
+}
+ListRow.Text1Row = ({ top, topProps }: Text1RowProps) => {
+  return <Text {...topProps}>{top}</Text>;
+};
+
 export default ListRow;
