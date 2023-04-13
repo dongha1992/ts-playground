@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCustomRouter } from 'hooks/useCustomRouter';
 import { useState } from 'react';
 import { FixedBottomCTA, Radio, Spacing } from 'components';
