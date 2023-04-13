@@ -1,14 +1,27 @@
-import React, { createContext, ReactElement, useState, Dispatch, SetStateAction, useContext } from 'react';
-import { Dialog as ReachDialog } from '@reach/dialog';
-import * as mq from 'styles/media-queries';
+import React, {
+  createContext,
+  ReactElement,
+  useState,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  PropsWithChildren,
+  ReactNode,
+  HTMLAttributes,
+  cloneElement,
+} from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Top22 } from './Top';
+import { GlobalPortal } from 'GlobalPortal';
+import Button from './Button';
+import Text from './Text';
+import Spacing from './Spacing';
+import { colors } from 'constants/colors';
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>];
 const ModalContext = createContext<ModalState | null>(null);
 
-function useModal() {
+function useModalContext() {
   const context = React.useContext(ModalContext);
   if (context === null) {
     throw new Error(`useModal must be used within a ModalProvider`);
@@ -16,51 +29,116 @@ function useModal() {
   return context as ModalState;
 }
 
-function Modal() {
+function Modal(props: HTMLAttributes<HTMLDivElement>) {
   const [isOpen, setIsOpen] = useState(false);
   const value = [isOpen, setIsOpen];
-  return <ModalContext.Provider value={value as ModalState} />;
+  return <ModalContext.Provider value={value as ModalState} {...props} />;
 }
 
-function ModalCloseButton({ children: child }: any) {
-  const [, setIsOpen] = useModal();
-}
-function ModalOpenButton({ children: child }: any) {
-  const [, setIsOpen] = useModal();
+interface Children {
+  children: ReactElement;
 }
 
-function ModalContentsBase(props: any) {
-  const [isOpen, setIsOpen] = useModal();
-  return <Dialog isOpen={isOpen} onDismiss={() => setIsOpen(false)} {...props} />;
+function ModalCloseButton({ children: child }: Children) {
+  const [, setIsOpen] = useModalContext();
+
+  return cloneElement(child, {
+    onClick: () => setIsOpen(false),
+  });
+}
+function ModalOpenButton({ children: child }: Children) {
+  const [, setIsOpen] = useModalContext();
+
+  return cloneElement(child, {
+    onClick: () => setIsOpen(true),
+  });
 }
 
-function ModalContents({ title, children, ...props }: any) {
+function ModalContentsBase(props: HTMLAttributes<HTMLDivElement>) {
+  const [isOpen, _] = useModalContext();
+
+  if (!isOpen) return null;
+
+  return (
+    <GlobalPortal.Consumer>
+      <div
+        className="modal-container"
+        css={css`
+          position: fixed;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          top: 0px;
+          left: 0px;
+          height: 100%;
+          width: 100%;
+        `}
+      >
+        <Dialog {...props} />
+      </div>
+    </GlobalPortal.Consumer>
+  );
+}
+
+type Props = PropsWithChildren<{
+  title: string;
+}>;
+
+function ModalContents({ title, children, ...props }: Props) {
   return (
     <ModalContentsBase {...props}>
       <div
         css={css`
           display: flex;
-          justify-content: flex-end;
+          flex-direction: column;
         `}
       >
-        <ModalCloseButton>닫기</ModalCloseButton>
-        <Top22>{title}</Top22>
+        <div css={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-end' }}>
+          <ModalCloseButton>
+            <CircleButton>
+              <span aria-hidden>×</span>
+            </CircleButton>
+          </ModalCloseButton>
+        </div>
+        <Text
+          className="typography-t1"
+          css={css`
+            text-align: center;
+          `}
+        >
+          {title}
+        </Text>
         {children}
       </div>
+      <Spacing size={30} />
     </ModalContentsBase>
   );
 }
 
 export { Modal, ModalCloseButton, ModalOpenButton, ModalContents };
 
-const Dialog = styled(ReachDialog)({
-  maxWidth: '450px',
-  borderRadius: '3px',
-  paddingBottom: '3.5em',
-  boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.2)',
-  margin: '20vh auto',
-  [mq.small]: {
-    width: '100%',
-    margin: '10vh auto',
-  },
+const Dialog = styled.div`
+  position: relative;
+  width: 432px;
+  height: auto;
+  border-radius: 3px;
+  padding: 16px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 10px;
+`;
+
+const CircleButton = styled.button({
+  borderRadius: '30px',
+  padding: '0',
+  width: '40px',
+  height: '40px',
+  lineHeight: '1',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: colors.white,
+  color: colors.black,
+  border: `1px solid ${colors.greyOpacity400}`,
+  cursor: 'pointer',
 });

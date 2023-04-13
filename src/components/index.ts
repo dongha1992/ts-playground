@@ -15,7 +15,7 @@ import Header from './Header';
 import Range from './Range';
 import TextArea from './TextArea';
 import TextFieldLine from './TextFieldLine';
-import Modal from './Modal';
+import LoginForm from './LoginForm';
 
 export {
   FullPageSpinner,
@@ -35,5 +35,5 @@ export {
   Range,
   TextArea,
   TextFieldLine,
-  Modal,
+  LoginForm,
 };

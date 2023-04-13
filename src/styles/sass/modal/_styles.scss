@@ -1,0 +1,5 @@
+@import '../mixins/z-index';
+
+.modal-container {
+  z-index: z-index('modal');
+}

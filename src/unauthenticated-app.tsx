@@ -1,6 +1,7 @@
-import { css } from '@emotion/react';
-import { Icon, Spacing } from 'components';
 import React from 'react';
+import { css } from '@emotion/react';
+import { Icon, Spacing, LoginForm, Button } from 'components';
+import { Modal, ModalCloseButton, ModalContents, ModalOpenButton } from 'components/Modal';
 
 function UnauthenticatedApp() {
   return (
@@ -15,6 +16,28 @@ function UnauthenticatedApp() {
       `}
     >
       <Spacing size={20} />
+      <div
+        css={css`
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-gap: 0.75rem;
+        `}
+      >
+        <Modal>
+          <ModalOpenButton>
+            <Button>로그인</Button>
+          </ModalOpenButton>
+          <ModalContents title="Login">
+            <LoginForm />
+          </ModalContents>
+        </Modal>
+        <Modal>
+          <ModalOpenButton>
+            <Button>회원가입</Button>
+          </ModalOpenButton>
+          <ModalContents title="Login">ㅇㅁㄴ</ModalContents>
+        </Modal>
+      </div>
     </div>
   );
 }

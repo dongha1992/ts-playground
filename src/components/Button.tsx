@@ -3,6 +3,7 @@ import useId from 'hooks/useId';
 import classnames from 'classnames';
 
 type Props = PropsWithChildren<{
+  buttonType?: 'submit';
   type?: 'primary' | 'danger' | 'light' | 'dark';
   style?: 'fill' | 'outline' | 'weak' | 'flat';
   display?: 'inline' | 'block' | 'full';
@@ -13,12 +14,22 @@ type Props = PropsWithChildren<{
 }>;
 
 function Button(props: Props) {
-  const { type = 'primary', style = 'fill', display = 'inline', disabled, className, children, ...rest } = props;
+  const {
+    type = 'primary',
+    style = 'fill',
+    display = 'inline',
+    disabled,
+    className,
+    children,
+    buttonType,
+    ...rest
+  } = props;
   const buttonId = useId();
 
   return (
     <button
       id={buttonId}
+      type={buttonType}
       className={classnames(
         'button',
         'button--size-big',
