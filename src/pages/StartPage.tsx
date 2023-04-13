@@ -1,5 +1,5 @@
-import React from 'react';
-import { Banner, Icon, Spacing, Border, List, Text } from 'components';
+import React, { useEffect } from 'react';
+import { Banner, Icon, Spacing, Border, List } from 'components';
 import { Top22 } from 'components/Top';
 import { marginX24 } from 'utils/spacing';
 import ListHeader from 'components/ListHeader';
@@ -10,6 +10,7 @@ import { useCustomRouter } from 'hooks/useCustomRouter';
 
 function StartPage() {
   const router = useCustomRouter();
+
   return (
     <>
       <Spacing size={20} />
