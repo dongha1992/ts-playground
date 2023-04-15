@@ -13,6 +13,7 @@ export function handlers() {
     rest.post('/api/loan-inquiry', postLoanInquiry),
     rest.get('/api/loan-inquiry/progress', getLoanInquiryProgress),
     rest.get('/api/loan-inquiry/result', getLoanInquiryResult),
+
     // 아래 user 관련은 위와 조금 다름
     rest.post(`${authUrl}/login`, postLogin),
     rest.post(`${authUrl}/register`, postRegister),
@@ -24,19 +25,20 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const authUrl = process.env.REACT_APP_AUTH_URL;
 
 const postLogin: PostParameter = async (req, res, ctx) => {
-  const { username, password } = req.body;
+  const { username, password } = req.body as any;
   const user = await usersDB.authenticate({ username, password });
   return res(ctx.json({ user }));
 };
 
 const postRegister: PostParameter = async (req, res, ctx) => {
-  const { username, password } = req.body;
+  const { username, password } = req.body as any;
+
   const userFields = { username, password };
   await usersDB.create(userFields);
   let user;
   try {
     user = await usersDB.authenticate(userFields);
-  } catch (error) {
+  } catch (error: any) {
     return res(ctx.status(400), ctx.json({ status: 400, message: error.message }));
   }
   return res(ctx.json({ user }));
@@ -50,10 +52,10 @@ const getMe: GetParameter = async (req, res, ctx) => {
 
 const getToken = (req: any) => req.headers.get('Authorization')?.replace('Bearer ', '');
 
-async function getUser(req) {
+async function getUser(req: any) {
   const token = getToken(req);
   if (!token) {
-    const error = new Error('A token must be provided');
+    const error: any = new Error('A token must be provided');
     error.status = 401;
     throw error;
   }
@@ -61,7 +63,7 @@ async function getUser(req) {
   try {
     userId = atob(token);
   } catch (e) {
-    const error = new Error('Invalid token. Please login again.');
+    const error: any = new Error('Invalid token. Please login again.');
     error.status = 401;
     throw error;
   }

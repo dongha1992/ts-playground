@@ -48,7 +48,7 @@ const asyncReducer = <D, E>(state: AsyncState<D, E>, action: AsyncAction<D, E>):
 
 const defaultInitialState = { status: 'idle', data: null, error: null };
 
-function useAsync<D, E>(initialState: AsyncState<D, E>) {
+function useAsync<D, E>(initialState?: AsyncState<D, E>) {
   const initialStateRef = useRef({ ...defaultInitialState, ...initialState });
 
   const [{ status, data, error }, setState] = useReducer(asyncReducer, initialStateRef.current as AsyncState<D, E>);

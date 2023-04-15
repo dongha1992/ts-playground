@@ -6,7 +6,7 @@ import UnauthenticatedApp from 'unauthenticated-app';
 // TODO: lazy사용
 
 function App() {
-  const user = useAuth();
+  const { user } = useAuth();
   return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
 }
 

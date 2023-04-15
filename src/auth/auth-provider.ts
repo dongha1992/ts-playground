@@ -1,5 +1,4 @@
-import Axios from 'axios';
-const axios = Axios.create();
+import axios from 'axios';
 
 const localStorageKey = '__auth_provider_token__';
 
@@ -14,6 +13,7 @@ interface User {
 }
 
 function handleUserResponse({ user }: any) {
+  console.log(user, 'user');
   window.localStorage.setItem(localStorageKey, user.token);
   return user;
 }
@@ -34,9 +34,9 @@ const authURL = process.env.REACT_APP_AUTH_URL;
 
 async function authClient<Request = any>(endpoint: string, data: Request) {
   const url = `${authURL}/${endpoint}`;
-  return axios.post<Response>(url, { data }).then(async response => {
+  return axios.post<Response>(url, data).then(async response => {
     if (response.status === 200) {
-      return data;
+      return response.data;
     } else {
       return Promise.reject(data);
     }

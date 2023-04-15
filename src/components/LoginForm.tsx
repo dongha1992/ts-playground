@@ -1,18 +1,21 @@
 import React, { FormEvent, ReactElement, cloneElement } from 'react';
 import Spacing from './Spacing';
 import TextFieldLine from './TextFieldLine';
-// import { Spinner } from 'components';
+import { useAsync } from 'hooks/useAsync';
+import { Spinner } from 'components';
 
 interface Props {
-  onSubmit: () => void;
+  onSubmit: <T>(form: { username: string; password: string }) => Promise<T>;
   submitButton: ReactElement;
 }
 
 function LoginForm({ onSubmit, submitButton }: Props) {
-  // const isLoading = true;
-  const onSubmitHandler = (event: FormEvent) => {
+  const { isLoading, isError, error, run } = useAsync();
+
+  const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit();
+    const [username, password] = event.currentTarget.elements as any;
+    run(onSubmit({ username: username.value, password: password.value }));
   };
 
   return (
@@ -26,9 +29,11 @@ function LoginForm({ onSubmit, submitButton }: Props) {
         {
           type: 'submit',
         },
-        ...(Array.isArray(submitButton.props.children) ? submitButton.props.children : [submitButton.props.children])
-        // isLoading ? <Spinner /> : null
+        ...(Array.isArray(submitButton.props.children) ? submitButton.props.children : [submitButton.props.children]),
+        isLoading ? <Spinner /> : null
       )}
+      {/* {isError ? <ErrorMessage error={error} /> : null} */}
+      {isError ? <div>에러</div> : null}
     </form>
   );
 }
