@@ -55,7 +55,9 @@ function ModalOpenButton({ children: child }: Children) {
 function ModalContentsBase(props: HTMLAttributes<HTMLDivElement>) {
   const [isOpen, _] = useModalContext();
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <GlobalPortal.Consumer>

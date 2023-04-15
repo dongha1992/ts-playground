@@ -1,11 +1,13 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { Icon, Spacing, LoginForm, Button } from 'components';
-import { Modal, ModalCloseButton, ModalContents, ModalOpenButton } from 'components/Modal';
+import { Spacing, LoginForm, Button } from 'components';
+import { Modal, ModalContents, ModalOpenButton } from 'components/Modal';
 
 function UnauthenticatedApp() {
   const registerHandler = () => {};
-  const loginHandler = () => {};
+  const loginHandler = () => {
+    console.log('fire login button');
+  };
   return (
     <div
       css={css`
@@ -30,7 +32,7 @@ function UnauthenticatedApp() {
             <Button>로그인</Button>
           </ModalOpenButton>
           <ModalContents title="Login">
-            <LoginForm onSubmit={loginHandler} />
+            <LoginForm onSubmit={loginHandler} submitButton={<Button>로그인</Button>} />
           </ModalContents>
         </Modal>
         <Modal>
@@ -38,7 +40,7 @@ function UnauthenticatedApp() {
             <Button>회원가입</Button>
           </ModalOpenButton>
           <ModalContents title="Login">
-            <LoginForm onSubmit={registerHandler} />
+            <LoginForm onSubmit={registerHandler} submitButton={<Button>회원가입</Button>} />
           </ModalContents>
         </Modal>
       </div>

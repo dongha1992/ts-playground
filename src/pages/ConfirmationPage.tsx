@@ -1,8 +1,8 @@
+import React from 'react';
 import { Button, FixedBottomCTA, List, ListRow, Spacing } from 'components';
 import { Top22 } from 'components/Top';
 import { colors } from 'constants/colors';
 import { useCustomRouter } from 'hooks/useCustomRouter';
-import React from 'react';
 
 function ConfirmationPage() {
   const router = useCustomRouter();

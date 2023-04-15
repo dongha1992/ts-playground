@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Banner, Icon, Spacing, Border, List } from 'components';
 import { Top22 } from 'components/Top';
 import { marginX24 } from 'utils/spacing';

@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCustomRouter } from 'hooks/useCustomRouter';
-import { useState } from 'react';
 import { FixedBottomCTA, Radio, Spacing } from 'components';
 import { Top22 } from 'components/Top';
 import { colors } from 'constants/colors';

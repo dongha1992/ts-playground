@@ -1,6 +1,5 @@
 import React from 'react';
 import { useCustomRouter } from 'hooks/useCustomRouter';
-import { useEffect, useState } from 'react';
 import { Spacing, List, ListRow } from 'components';
 import { Top22 } from 'components/Top';
 import { colors } from 'constants/colors';

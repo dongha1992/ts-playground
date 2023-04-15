@@ -16,7 +16,9 @@ function PortalProvider({ children }: PortalProviderProps) {
       <div
         id="portal-container"
         ref={elem => {
-          if (portalContainerRef !== null || elem === null) return;
+          if (portalContainerRef !== null || elem === null) {
+            return;
+          }
           setPortalContainerRef(elem);
         }}
       />

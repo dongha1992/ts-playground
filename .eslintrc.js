@@ -114,7 +114,7 @@ module.exports = {
     'react/display-name': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
-
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'react/jsx-no-target-blank': 'error',
 
     '@typescript-eslint/no-var-requires': 'warn',

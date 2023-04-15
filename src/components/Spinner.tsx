@@ -15,7 +15,7 @@ Spinner.defaultProps = {
   'aria-label': 'loading',
 };
 
-export default function FullPageSpinner() {
+function FullPageSpinner() {
   return (
     <div
       css={{
@@ -31,3 +31,5 @@ export default function FullPageSpinner() {
     </div>
   );
 }
+
+export { FullPageSpinner, Spinner };

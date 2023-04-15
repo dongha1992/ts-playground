@@ -1,6 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { FixedBottomCTA, Icon, List, ListRow, Lottie, Spacing } from 'components';
+import { FixedBottomCTA, List, ListRow, Lottie, Spacing } from 'components';
 import { Top22 } from 'components/Top';
 import { colors } from 'constants/colors';
 

@@ -1,4 +1,4 @@
-import FullPageSpinner from './FullPageSpinner';
+import { FullPageSpinner, Spinner } from './Spinner';
 import PageLayout from './PageLayout';
 import Spacing from './Spacing';
 import Icon from './Icon';
@@ -18,6 +18,7 @@ import TextFieldLine from './TextFieldLine';
 import LoginForm from './LoginForm';
 
 export {
+  Spinner,
   FullPageSpinner,
   Spacing,
   PageLayout,

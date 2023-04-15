@@ -1,21 +1,34 @@
-import styled from '@emotion/styled';
-import React, { FormEvent } from 'react';
-import Button from './Button';
+import React, { FormEvent, ReactElement, cloneElement } from 'react';
 import Spacing from './Spacing';
 import TextFieldLine from './TextFieldLine';
+import { Spinner } from 'components';
 
-function LoginForm({ onSubmit }: { onSubmit: () => void }) {
+interface Props {
+  onSubmit: () => void;
+  submitButton: ReactElement;
+}
+
+function LoginForm({ onSubmit, submitButton }: Props) {
+  const isLoading = true;
   const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
-    console.log(event, '!1');
+    onSubmit();
   };
+
   return (
     <form onSubmit={onSubmitHandler}>
       <TextFieldLine label="아이디" />
       <Spacing size={10} />
       <TextFieldLine label="비밀번호" />
       <Spacing size={10} />
-      <Button buttonType="submit">제출</Button>
+      {cloneElement(
+        submitButton,
+        {
+          type: 'submit',
+        },
+        ...(Array.isArray(submitButton.props.children) ? submitButton.props.children : [submitButton.props.children])
+        // isLoading ? <Spinner /> : null
+      )}
     </form>
   );
 }
