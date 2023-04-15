@@ -32,7 +32,7 @@ function UnauthenticatedApp() {
             <Button>로그인</Button>
           </ModalOpenButton>
           <ModalContents title="Login">
-            <LoginForm onSubmit={loginHandler} submitButton={<Button>로그인</Button>} />
+            <LoginForm onSubmit={loginHandler} submitButton={<Button css={{ marginTop: '10px' }}>로그인</Button>} />
           </ModalContents>
         </Modal>
         <Modal>
@@ -40,7 +40,10 @@ function UnauthenticatedApp() {
             <Button>회원가입</Button>
           </ModalOpenButton>
           <ModalContents title="Login">
-            <LoginForm onSubmit={registerHandler} submitButton={<Button>회원가입</Button>} />
+            <LoginForm
+              onSubmit={registerHandler}
+              submitButton={<Button css={{ marginTop: '10px' }}>회원가입</Button>}
+            />
           </ModalContents>
         </Modal>
       </div>

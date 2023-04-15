@@ -126,6 +126,7 @@ const Dialog = styled.div`
   border: 1px solid black;
   background-color: white;
   border-radius: 10px;
+  margin: 20px;
 `;
 
 const CircleButton = styled.button({
