@@ -1,7 +1,7 @@
 import React, { FormEvent, ReactElement, cloneElement } from 'react';
 import Spacing from './Spacing';
 import TextFieldLine from './TextFieldLine';
-import { Spinner } from 'components';
+// import { Spinner } from 'components';
 
 interface Props {
   onSubmit: () => void;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 function LoginForm({ onSubmit, submitButton }: Props) {
-  const isLoading = true;
+  // const isLoading = true;
   const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
     onSubmit();
