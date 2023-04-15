@@ -48,8 +48,6 @@ const asyncReducer = <D, E>(state: AsyncState<D, E>, action: AsyncAction<D, E>):
 
 const defaultInitialState = { status: 'idle', data: null, error: null };
 
-// type PromiseFn<T> = (...args: any) => Promise<T>;
-
 function useAsync<D, E>(initialState: AsyncState<D, E>) {
   const initialStateRef = useRef({ ...defaultInitialState, ...initialState });
 
@@ -57,25 +55,43 @@ function useAsync<D, E>(initialState: AsyncState<D, E>) {
 
   const safeSetState = useSafeDispatch(setState);
 
-  const setData: Dispatch<AsyncAction<D, E>> = useCallback(
-    data => {
+  const setData = useCallback(
+    (data: D) => {
       return safeSetState({ data, status: 'resolved' });
     },
     [safeSetState]
   );
 
-  const setError: Dispatch<AsyncAction<D, E>> = useCallback(
-    error => {
+  const setError = useCallback(
+    (error: E) => {
       return safeSetState({ error, status: 'rejected' });
     },
     [safeSetState]
   );
 
-  const setReset: Dispatch<AsyncAction<D, E>> = useCallback(() => {
+  const setReset = useCallback(() => {
     return () => safeSetState(initialStateRef.current as AsyncAction<D, E>);
   }, [safeSetState]);
 
-  const run = useCallback(() => {}, []);
+  const run = useCallback(
+    (promise: Promise<D>) => {
+      if (!promise || !promise.then) {
+        throw new Error('promise가 아닙니다.');
+      }
+      safeSetState({ status: 'pending' });
+      return promise.then(
+        (data: D) => {
+          setData(data);
+          return data;
+        },
+        (error: E) => {
+          setError(error);
+          return Promise.reject(error);
+        }
+      );
+    },
+    [safeSetState, setData, setError]
+  );
 
   return {
     isIdle: status === 'idle',
