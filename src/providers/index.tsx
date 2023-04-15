@@ -6,8 +6,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import 'styles/sass/app.scss';
 import { GlobalPortal } from 'GlobalPortal';
 import { PageLayout } from 'components';
+import { AuthProvider } from 'auth/auth-context';
 
-/* 이 파일에서 react-query, auth-provider 넣어줌 */
+/* 이 파일에서 react-query 넣어줌 */
 
 interface Props {
   children: ReactNode;
@@ -27,7 +28,9 @@ function AppProviders({ children }: Props) {
         `}
       />
       <PageLayout>
-        <Router>{children}</Router>
+        <Router>
+          <AuthProvider>{children}</AuthProvider>
+        </Router>
       </PageLayout>
     </GlobalPortal.Provider>
   );

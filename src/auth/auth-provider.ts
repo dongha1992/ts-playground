@@ -23,14 +23,14 @@ function login({ username, password }: User) {
 }
 
 function register({ username, password }: User) {
-  return authClient('login', { username, password }).then(handleUserResponse);
+  return authClient('register', { username, password }).then(handleUserResponse);
 }
 
 async function logout() {
   window.localStorage.removeItem(localStorageKey);
 }
 
-const authURL = process.env.REACT_APP_AUTH;
+const authURL = process.env.REACT_APP_AUTH_URL;
 
 async function authClient<Request = any>(endpoint: string, data: Request) {
   const url = `${authURL}/${endpoint}`;

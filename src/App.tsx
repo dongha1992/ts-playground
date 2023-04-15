@@ -1,12 +1,12 @@
 /* AuthenticatedApp과 UnauthenticatedApp 분기 */
+import { useAuth } from 'auth/auth-context';
 import AuthenticatedApp from 'authenticated-app';
 import UnauthenticatedApp from 'unauthenticated-app';
 
 // TODO: lazy사용
-// TODO: auth 추가
 
 function App() {
-  const user = null;
+  const user = useAuth();
   return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
 }
 

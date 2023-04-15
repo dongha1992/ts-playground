@@ -2,11 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["react", "@emotion/react/types/css-prop"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -23,35 +19,18 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react"
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "paths": {
-    "pages/*": [
-      "pages/*"
-    ],
-    "components/*": [
-      "components/*"
-    ],
-    "styles/*": [
-      "styles/*"
-    ],
-    "constants/*": [
-      "constants/*"
-    ],
-    "providers/*": [
-      "providers/*"
-    ],
-    "routes/*": [
-      "routes/*"
-    ],   
-    "utils/*": [
-      "utils/*"
-    ],
-    "assets/*": [
-      "assets/*"
-    ],
-
+    "pages/*": ["pages/*"],
+    "components/*": ["components/*"],
+    "styles/*": ["styles/*"],
+    "constants/*": ["constants/*"],
+    "providers/*": ["providers/*"],
+    "routes/*": ["routes/*"],
+    "utils/*": ["utils/*"],
+    "assets/*": ["assets/*"],
+    "hooks/*": ["hooks/*"],
+    "auth/*": ["auth/*"]
     // "sections/*": [
     //   "sections/*"
     // ],
@@ -64,9 +43,6 @@
     // "containers/*": [
     //   "containers/*"
     // ]
-    // "hooks/*": [
-    //   "hooks/*"
-    // ],
     // "stores/*": [
     //   "stores/*"
     // ]
