@@ -4,6 +4,8 @@ import { Icon, Spacing, LoginForm, Button } from 'components';
 import { Modal, ModalCloseButton, ModalContents, ModalOpenButton } from 'components/Modal';
 
 function UnauthenticatedApp() {
+  const registerHandler = () => {};
+  const loginHandler = () => {};
   return (
     <div
       css={css`
@@ -28,14 +30,16 @@ function UnauthenticatedApp() {
             <Button>로그인</Button>
           </ModalOpenButton>
           <ModalContents title="Login">
-            <LoginForm />
+            <LoginForm onSubmit={loginHandler} />
           </ModalContents>
         </Modal>
         <Modal>
           <ModalOpenButton>
             <Button>회원가입</Button>
           </ModalOpenButton>
-          <ModalContents title="Login">ㅇㅁㄴ</ModalContents>
+          <ModalContents title="Login">
+            <LoginForm onSubmit={registerHandler} />
+          </ModalContents>
         </Modal>
       </div>
     </div>

@@ -4,7 +4,7 @@ import Button from './Button';
 import Spacing from './Spacing';
 import TextFieldLine from './TextFieldLine';
 
-function LoginForm() {
+function LoginForm({ onSubmit }: { onSubmit: () => void }) {
   const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
     console.log(event, '!1');

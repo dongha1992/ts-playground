@@ -4,19 +4,17 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
-  useContext,
   PropsWithChildren,
-  ReactNode,
   HTMLAttributes,
   cloneElement,
 } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { GlobalPortal } from 'GlobalPortal';
-import Button from './Button';
 import Text from './Text';
 import Spacing from './Spacing';
 import { colors } from 'constants/colors';
+import { callAll } from 'utils/callAll';
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>];
 const ModalContext = createContext<ModalState | null>(null);
@@ -43,14 +41,14 @@ function ModalCloseButton({ children: child }: Children) {
   const [, setIsOpen] = useModalContext();
 
   return cloneElement(child, {
-    onClick: () => setIsOpen(false),
+    onClick: callAll(() => setIsOpen(false), child.props.onClick),
   });
 }
 function ModalOpenButton({ children: child }: Children) {
   const [, setIsOpen] = useModalContext();
 
   return cloneElement(child, {
-    onClick: () => setIsOpen(true),
+    onClick: callAll(() => setIsOpen(true), child.props.onClick),
   });
 }
 
