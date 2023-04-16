@@ -13,7 +13,6 @@ interface User {
 }
 
 function handleUserResponse({ user }: any) {
-  console.log(user, 'user');
   window.localStorage.setItem(localStorageKey, user.token);
   return user;
 }

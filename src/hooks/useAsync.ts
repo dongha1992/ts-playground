@@ -27,18 +27,19 @@ export type AsyncAction<D, E> = RejectedAction<E> | PendingAction | ResolvedActi
 function useSafeDispatch<D, E>(dispatch: Dispatch<AsyncAction<D, E>>): Dispatch<AsyncAction<D, E>> {
   const mountedRef = useRef(false);
 
-  useLayoutEffect(() => {
+  useLayoutEffect((): void | any => {
     mountedRef.current = true;
-    return () => {
-      mountedRef.current = false;
-    };
+    return () => (mountedRef.current = false);
   }, []);
 
-  return action => {
-    if (mountedRef.current) {
-      dispatch({ ...action });
-    }
-  };
+  return useCallback(
+    action => {
+      if (mountedRef.current) {
+        dispatch({ ...action });
+      }
+    },
+    [dispatch]
+  );
 }
 
 const asyncReducer = <D, E>(state: AsyncState<D, E>, action: AsyncAction<D, E>): AsyncState<D, E> => ({

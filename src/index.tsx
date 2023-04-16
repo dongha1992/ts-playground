@@ -10,9 +10,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <AppProviders>
-      <App />
-    </AppProviders>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <AppProviders>
+    <App />
+  </AppProviders>
+  // </React.StrictMode>
 );

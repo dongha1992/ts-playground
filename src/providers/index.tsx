@@ -7,6 +7,7 @@ import 'styles/sass/app.scss';
 import { GlobalPortal } from 'GlobalPortal';
 import { PageLayout } from 'components';
 import { AuthProvider } from 'auth/auth-context';
+import { useForceRerender } from 'hooks/useForceRerender';
 
 /* 이 파일에서 react-query 넣어줌 */
 
@@ -15,6 +16,7 @@ interface Props {
 }
 
 function AppProviders({ children }: Props) {
+  const forceRenderer = useForceRerender();
   return (
     <GlobalPortal.Provider>
       <Global
@@ -29,6 +31,7 @@ function AppProviders({ children }: Props) {
       />
       <PageLayout>
         <Router>
+          <button onClick={forceRenderer}>강제 렌더</button>
           <AuthProvider>{children}</AuthProvider>
         </Router>
       </PageLayout>

@@ -16,6 +16,8 @@ import Range from './Range';
 import TextArea from './TextArea';
 import TextFieldLine from './TextFieldLine';
 import LoginForm from './LoginForm';
+import ErrorMessage from './ErrorMessage';
+import FullPageErrorFallback from './FullPageErrorFallback';
 
 export {
   Spinner,
@@ -37,4 +39,6 @@ export {
   TextArea,
   TextFieldLine,
   LoginForm,
+  ErrorMessage,
+  FullPageErrorFallback,
 };
