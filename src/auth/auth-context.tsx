@@ -26,16 +26,28 @@ function AuthProvider(props: PropsWithChildren) {
     run(getUser());
   }, [run]);
 
+  const login = useCallback(
+    (form: { username: string; password: string }) => {
+      return auth.login(form).then(user => setData(user));
+    },
+    [setData]
+  );
+
   const register = useCallback(
-    (form: any) => {
+    (form: { username: string; password: string }) => {
       return auth.register(form).then(user => setData(user));
     },
     [setData]
   );
 
+  const logout = useCallback(() => {
+    auth.logout();
+    setData(null);
+  }, [setData]);
+
   // TODO: 메모 해야함
 
-  const value = { user, register };
+  const value = { user, register, login, logout };
 
   if (isLoading || isIdle) {
     return <FullPageSpinner />;

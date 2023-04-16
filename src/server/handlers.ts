@@ -26,6 +26,7 @@ const authUrl = process.env.REACT_APP_AUTH_URL;
 
 const postLogin: PostParameter = async (req, res, ctx) => {
   const { username, password } = req.body as any;
+
   const user = await usersDB.authenticate({ username, password });
   return res(ctx.json({ user }));
 };

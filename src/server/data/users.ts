@@ -1,11 +1,5 @@
 //https://github.com/kentcdodds/bookshelf/blob/main/src/test/server/server-handlers.js 참고
 
-declare global {
-  interface Window {
-    __my: any;
-  }
-}
-
 const usersKey = '__my_users__';
 let users: any = {};
 const persist = () => window.localStorage.setItem(usersKey, JSON.stringify(users));

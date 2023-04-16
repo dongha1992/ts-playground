@@ -5,7 +5,7 @@ import { Modal, ModalContents, ModalOpenButton } from 'components/Modal';
 import { useAuth } from 'auth/auth-context';
 
 function UnauthenticatedApp() {
-  const { register } = useAuth();
+  const { register, login } = useAuth();
 
   return (
     <div
@@ -31,7 +31,7 @@ function UnauthenticatedApp() {
             <Button>로그인</Button>
           </ModalOpenButton>
           <ModalContents title="로그인">
-            <LoginForm onSubmit={register} submitButton={<Button css={{ marginTop: '10px' }}>로그인</Button>} />
+            <LoginForm onSubmit={login} submitButton={<Button css={{ marginTop: '10px' }}>로그인</Button>} />
           </ModalContents>
         </Modal>
         <Modal>

@@ -15,6 +15,7 @@ function LoginForm({ onSubmit, submitButton }: Props) {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const [username, password] = event.currentTarget.elements as any;
+
     run(onSubmit({ username: username.value, password: password.value }));
   };
 

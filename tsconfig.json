@@ -3,7 +3,7 @@
     "baseUrl": "src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["react", "@emotion/react/types/css-prop"],
+    "types": ["react", "@emotion/react/types/css-prop", "webpack-env"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
