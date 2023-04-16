@@ -70,12 +70,12 @@ function install() {
           },
           'button:not([data-reach-tab])': {
             borderRadius: 5,
-            background: 'black',
+            background: 'white',
             ':hover': {
               background: 'black',
             },
             border: 0,
-            color: 'black',
+            color: 'gray',
           },
           '[data-reach-tab]': {
             border: 0,
@@ -144,7 +144,7 @@ function install() {
               onClick={toggleShow}
             >
               <FaTools />
-              Custom DevTools
+              <span css={{ color: 'white' }}>Custom DevTools</span>
             </button>
           </Tooltip>
           {show ? (
@@ -195,15 +195,245 @@ function install() {
 }
 
 function ControlsPanel() {
-  return <div>ControlsPanel</div>;
+  return (
+    <div
+      css={{
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        gridTemplateRows: 'repeat(auto-fill, minmax(40px, 40px) )',
+        gridGap: '0.5rem',
+        marginRight: '1.5rem',
+      }}
+    >
+      <EnableDevTools />
+      <FailureRate />
+      <RequestMinTime />
+      <RequestVarTime />
+      <ClearLocalStorage />
+    </div>
+  );
 }
-function ClearLocalStorage() {}
-function FailureRate() {}
-function EnableDevTools() {}
-function RequestMinTime() {}
-function RequestVarTime() {}
+
+function ClearLocalStorage() {
+  function clear() {
+    window.localStorage.clear();
+    window.location.assign(window.location.href);
+  }
+  return <button onClick={clear}>초기화</button>;
+}
+
+function FailureRate() {
+  const [failureRate, setFailureRate] = useLocalStorageState('__my_failure_rate__', 0);
+
+  const handleChange = (event: any) => setFailureRate(Number(event.target.value) / 100);
+  return (
+    <div
+      css={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      <label htmlFor="failureRate">Request 실패 비율: </label>
+      <input
+        css={{ marginLeft: 6 }}
+        value={failureRate * 100}
+        type="number"
+        min="0"
+        max="100"
+        step="10"
+        onChange={handleChange}
+        id="failureRate"
+      />
+    </div>
+  );
+}
+function EnableDevTools() {
+  const [enableDevTools, setEnableDevTools] = useLocalStorageState('dev-tools', process.env.NODE_ENV === 'development');
+  const handleChange = (event: any) => setEnableDevTools(event.target.checked);
+  return (
+    <div
+      css={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <input
+        css={{ marginRight: 6 }}
+        checked={enableDevTools}
+        type="checkbox"
+        onChange={handleChange}
+        id="enableDevTools"
+      />
+      <label htmlFor="enableDevTools">항상 dev-tools 사용하기</label>
+    </div>
+  );
+}
+function RequestMinTime() {
+  const [minTime, setMinTime] = useLocalStorageState('__my_min_request_time__', 400);
+  const handleChange = (event: any) => setMinTime(Number(event.target.value));
+  return (
+    <div
+      css={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      <label htmlFor="minTime">Request min time (ms): </label>
+      <input
+        css={{ marginLeft: 6 }}
+        value={minTime}
+        type="number"
+        step="100"
+        min="0"
+        max={1000 * 60}
+        onChange={handleChange}
+        id="minTime"
+      />
+    </div>
+  );
+}
+function RequestVarTime() {
+  const [varTime, setVarTime] = useLocalStorageState('__my_variable_request_time__', 400);
+
+  const handleChange = (event: any) => setVarTime(Number(event.target.value));
+  return (
+    <div
+      css={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      <label htmlFor="varTime">Request variable time (ms): </label>
+      <input
+        css={{ marginLeft: 6 }}
+        value={varTime}
+        type="number"
+        step="100"
+        min="0"
+        max={1000 * 60}
+        onChange={handleChange}
+        id="varTime"
+      />
+    </div>
+  );
+}
+
 function RequestFailUI() {
-  return <div>RequestFailUI</div>;
+  const [failConfig, setFailConfig] = useLocalStorageState('__my_request_fail_config__', []);
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    const { requestMethod, urlMatch } = event.target.elements;
+    setFailConfig((c: any) => [...c, { requestMethod: requestMethod.value, urlMatch: urlMatch.value }]);
+    requestMethod.value = '';
+    urlMatch.value = '';
+  }
+  function handleRemoveClick(index: number) {
+    setFailConfig((c: any) => [...c.slice(0, index), ...c.slice(index + 1)]);
+  }
+  return (
+    <div
+      css={{
+        display: 'flex',
+        width: '100%',
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        css={{
+          display: 'grid',
+          gridTemplateRows: 'repeat(auto-fill, minmax(50px, 60px) )',
+          maxWidth: 300,
+          width: '100%',
+          marginRight: '1rem',
+          gridGap: 10,
+        }}
+      >
+        <div
+          css={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <label htmlFor="requestMethod">Method:</label>
+          <select id="requestMethod" required>
+            <option value="">Select</option>
+            <option value="ALL">ALL</option>
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+        </div>
+        <div css={{ width: '100%' }}>
+          <label css={{ display: 'block' }} htmlFor="urlMatch">
+            URL Match:
+          </label>
+          <input
+            autoComplete="off"
+            css={{ width: '100%', marginTop: 4 }}
+            id="urlMatch"
+            required
+            placeholder="/api/list-items/:listItemId"
+          />
+        </div>
+        <div>
+          <button css={{ padding: '6px 16px' }} type="submit">
+            + Add
+          </button>
+        </div>
+      </form>
+      <ul
+        css={{
+          listStyle: 'none',
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          paddingBottom: '2rem',
+        }}
+      >
+        {failConfig.map(({ requestMethod, urlMatch }: any, index: number) => (
+          <li
+            key={index}
+            css={{
+              padding: '6px 10px',
+              borderRadius: 5,
+              margin: '5px 0',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              background: 'rgb(20,36,55)',
+            }}
+          >
+            <div css={{ display: 'flex', flexWrap: 'wrap' }}>
+              <strong css={{ minWidth: 70 }}>{requestMethod}:</strong>
+              <span css={{ marginLeft: 10, whiteSpace: 'pre' }}>{urlMatch}</span>
+            </div>
+            <button
+              css={{
+                opacity: 0.6,
+                ':hover': { opacity: 1 },
+                fontSize: 13,
+                background: 'rgb(11, 20, 33) !important',
+              }}
+              onClick={() => handleRemoveClick(index)}
+            >
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 function useLocalStorageState(
