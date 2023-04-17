@@ -15,7 +15,7 @@ declare global {
 
 if (process.env.NODE_ENV === 'development') {
   const { server } = require('./server/browser');
-  server.start({ onUnhandledRequest: 'bypass' });
+  server.start({ quiet: true, onUnhandledRequest: 'bypass' });
 }
 
 loadDevTools(() => {

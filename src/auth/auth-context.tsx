@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useContext, useEffect, useMemo, useCallback, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useEffect, useCallback } from 'react';
 // import { queryCache } from 'react-query';
 import * as auth from './auth-provider';
 import { getMeApi } from 'api/case2/user';

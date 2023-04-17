@@ -8,7 +8,7 @@ export const getMeApi = async ({
   // TODO: 에러 처리 해야함
 
   return apiClient
-    .get('me', {
+    .get('/me', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

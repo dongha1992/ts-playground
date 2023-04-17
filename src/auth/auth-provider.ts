@@ -18,11 +18,11 @@ function handleUserResponse({ user }: any) {
 }
 
 function login({ username, password }: User) {
-  return authClient('login', { username, password }).then(handleUserResponse);
+  return authClient('/login', { username, password }).then(handleUserResponse);
 }
 
 function register({ username, password }: User) {
-  return authClient('register', { username, password }).then(handleUserResponse);
+  return authClient('/register', { username, password }).then(handleUserResponse);
 }
 
 async function logout() {
@@ -32,7 +32,7 @@ async function logout() {
 const authURL = process.env.REACT_APP_AUTH_URL;
 
 async function authClient<Request = any>(endpoint: string, data: Request) {
-  const url = `${authURL}/${endpoint}`;
+  const url = `${authURL}${endpoint}`;
   return axios.post<Response>(url, data).then(async response => {
     if (response.status === 200) {
       return response.data;

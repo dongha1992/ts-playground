@@ -2,27 +2,34 @@ import { rest } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
 import { AddressTreeNode, addressTrees } from './data/data';
 import * as usersDB from './data/users';
+import { match } from 'node-match-path';
+
+/* failure 처리 때문에 msw 모듈 건드림.... */
 
 type GetParameter = Parameters<typeof rest.get>[1];
 type PostParameter = Parameters<typeof rest.post>[1];
 
-export function handlers() {
-  return [
-    rest.get('/api/apt-addresses', getAptAddresses),
-    rest.get('/api/regions', getRegions),
-    rest.post('/api/loan-inquiry', postLoanInquiry),
-    rest.get('/api/loan-inquiry/progress', getLoanInquiryProgress),
-    rest.get('/api/loan-inquiry/result', getLoanInquiryResult),
-
-    // 아래 user 관련은 위와 조금 다름
-    rest.post(`${authUrl}/login`, postLogin),
-    rest.post(`${authUrl}/register`, postRegister),
-    rest.get(`${apiUrl}/me`, getMe),
-  ];
-}
-
 const apiUrl = process.env.REACT_APP_API_URL;
 const authUrl = process.env.REACT_APP_AUTH_URL;
+
+let sleep: () => void;
+if (process.env.CI) {
+  sleep = () => Promise.resolve();
+} else if (process.env.NODE_ENV === 'test') {
+  sleep = () => Promise.resolve();
+} else {
+  sleep = (t = Math.random() * ls('__my_variable_request_time__', 400) + ls('__my_min_request_time__', 400)) =>
+    new Promise(resolve => setTimeout(resolve, t));
+}
+
+function ls(key: any, defaultVal: any) {
+  const lsVal = window.localStorage.getItem(key);
+  let val;
+  if (lsVal) {
+    val = Number(lsVal);
+  }
+  return Number.isFinite(val) ? val : defaultVal;
+}
 
 const postLogin: PostParameter = async (req, res, ctx) => {
   const { username, password } = req.body as any;
@@ -158,3 +165,104 @@ const getLoanInquiryResult: Parameters<typeof rest.get>[1] = (req, res, ctx) => 
 };
 
 const 천만 = 1000 * 10000;
+
+const handlers: any = [
+  rest.get('/api/apt-addresses', getAptAddresses),
+  rest.get('/api/regions', getRegions),
+  rest.post('/api/loan-inquiry', postLoanInquiry),
+  rest.get('/api/loan-inquiry/progress', getLoanInquiryProgress),
+  rest.get('/api/loan-inquiry/result', getLoanInquiryResult),
+
+  // 아래 user 관련은 위와 조금 다름
+  rest.post(`${authUrl}/login`, postLogin),
+  rest.post(`${authUrl}/register`, postRegister),
+  rest.get(`${apiUrl}/me`, getMe),
+].map(handler => {
+  const originalResolver = handler.resolver;
+  handler.resolver = async function resolver(req: any, res: any, ctx: any) {
+    try {
+      if (shouldFail(req)) {
+        throw new Error('Request failure (for testing purposes).');
+      }
+      const result = await originalResolver(req, res, ctx);
+      return result;
+    } catch (error: any) {
+      const status = error.status || 500;
+      return res(ctx.status(status), ctx.json({ status, message: error.message || 'Unknown Error' }));
+    } finally {
+      await sleep();
+    }
+  };
+  return handler;
+});
+
+// const handlers: any = [
+//   rest.get('/api/apt-addresses', getAptAddresses),
+//   rest.get('/api/regions', getRegions),
+//   rest.post('/api/loan-inquiry', postLoanInquiry),
+//   rest.get('/api/loan-inquiry/progress', getLoanInquiryProgress),
+//   rest.get('/api/loan-inquiry/result', getLoanInquiryResult),
+
+//   // 아래 user 관련은 위와 조금 다름
+//   rest.post(`${authUrl}/login`, postLogin),
+//   rest.post(`${authUrl}/register`, postRegister),
+//   rest.get(`${apiUrl}/me`, getMe),
+// ].map(handler => {
+//   const customHandler = new CustomRequestHandler(handler);
+//   console.log(handler, 'handler');
+//   console.log(customHandler, 'customHandler');
+//   customHandler.setCustomResolver(async function resolver(req: any, res: any, ctx: any) {
+//     try {
+//       if (shouldFail(req)) {
+//         throw new Error('Request failure (for testing purposes).');
+//       }
+//       const result = await customHandler.resolver(req, res, ctx);
+//       return result;
+//     } catch (error: any) {
+//       const status = error.status || 500;
+//       return res(ctx.status(status), ctx.json({ status, message: error.message || 'Unknown Error' }));
+//     } finally {
+//       await sleep();
+//     }
+//   });
+//   // customHandler.setCustomResolver(handler.resolver);
+//   return customHandler;
+// });
+
+function shouldFail(req: any) {
+  if (JSON.stringify(req.body)?.includes('FAIL')) {
+    return true;
+  }
+  if (req.url.searchParams.toString()?.includes('FAIL')) {
+    return true;
+  }
+  if (process.env.NODE_ENV === 'test') {
+    return false;
+  }
+  const failureRate = Number(window.localStorage.getItem('__my_failure_rate__') || 0);
+  if (Math.random() < failureRate) {
+    return true;
+  }
+  if (requestMatchesFailConfig(req)) {
+    return true;
+  }
+
+  return false;
+}
+
+function requestMatchesFailConfig(req: any) {
+  function configMatches({ requestMethod, urlMatch }: any) {
+    return (requestMethod === 'ALL' || req.method === requestMethod) && match(urlMatch, req.url.pathname).matches;
+  }
+  try {
+    const failConfig = JSON.parse(window.localStorage.getItem('__my_request_fail_config__') || '[]');
+    if (failConfig.some(configMatches)) {
+      return true;
+    }
+  } catch (error) {
+    window.localStorage.removeItem('__my_request_fail_config__');
+  }
+  return false;
+}
+
+export { handlers };

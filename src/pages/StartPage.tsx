@@ -49,11 +49,11 @@ function StartPage() {
         <ListRow
           contents={
             <ListRow.Text2Rows
-              top="자율과 책임 원칙 아래"
+              top="text2"
               topProps={{
                 color: colors.grey700,
               }}
-              bottom="스스로 결정하고 주도적으로 일할 수 있어요"
+              bottom="text22"
               bottomProps={{
                 color: colors.grey600,
                 typography: 't5',
@@ -64,7 +64,7 @@ function StartPage() {
           right={<Icon name="icon-check" size={30} />}
         />
       </List>
-      <FixedBottomCTA onClick={() => router.push('/property-type')}>기술과제 시작하기</FixedBottomCTA>
+      <FixedBottomCTA onClick={() => router.push('/property-type')}>다음</FixedBottomCTA>
     </>
   );
 }
